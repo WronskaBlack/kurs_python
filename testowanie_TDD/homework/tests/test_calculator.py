@@ -1,6 +1,6 @@
 import unittest
 
-import calculator
+from testowanie_TDD.homework import calculator
 
 
 class CalculatorTests(unittest.TestCase):
@@ -32,4 +32,3 @@ class CalculatorTests(unittest.TestCase):
 
     def test_div_method_zero(self):
         self.assertRaises(ZeroDivisionError, self.calculator.divide, 5, 0)
-

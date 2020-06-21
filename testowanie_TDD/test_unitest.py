@@ -2,7 +2,7 @@ import unittest
 from unittest import mock
 from parameterized import parameterized
 
-from functions_unittest import is_even, Account, Person, remove_file
+from testowanie_TDD.functions_unittest import is_even, Account, Person, remove_file, is_correct_website
 
 
 class BasicTestCase(unittest.TestCase):
@@ -47,11 +47,11 @@ class Account_Card_Test(unittest.TestCase):
     def setUp(self) -> None:
         # Given
         self.test_account = Account('Jan', 'Kowalski', 6000003000)
-        # test_card = Card(test_account, '1234')
+
 
     def test_account_owner(self):
         # When
-        #self.test_account.owner = MagicMock(return_value = 'Kazimierz')
+        #self.test_account.owner = mock.MagicMock(return_value = 'Kazimierz')
         result = self.test_account.owner()
         # Then
         self.assertEqual('Jan Kowalski', result)
@@ -96,3 +96,14 @@ class Person_Test(unittest.TestCase):
         result = self.person.say_name_with_title(title)
         self.assertEqual(result, output)
 
+class IsCorrectWebsiteTest(unittest.TestCase):
+    @parameterized.expand([
+        ['https://google.com', 200, True],
+        ['https://wp.pl', 300, True],
+        ['https://onet.pl', 400, False]
+    ])
+    def test_is_correct_with_200(self, url, status_code, expected):
+        with mock.patch('requests.get') as requests_get_mock:
+            requests_get_mock.return_value.status_code = status_code
+            result = is_correct_website(url)
+        self.assertEqual(expected, result)

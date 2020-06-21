@@ -1,4 +1,5 @@
 import os
+import requests
 
 
 def is_even(number):
@@ -39,3 +40,10 @@ class Person:
 
 def remove_file(file_name):
     os.remove(file_name)
+
+
+def is_correct_website(web):
+    result = requests.get(web)
+    if 200 <= result.status_code < 400:
+        return True
+    return False
