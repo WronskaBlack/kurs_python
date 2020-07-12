@@ -66,13 +66,13 @@ def birth_year():
 # Napisz program, który zwróci wartość bezwzględną liczby pobranej od
 # użytkownika. Program powinien pytać o tę liczbę tak długo, aż nie
 # zostanie ona poprawnie podana.
-# while True:
-#     try:
-#         number = int(input('Number: '))
-#         break
-#     except ValueError:
-#         print('Enter a number!')
-# print(abs(number))
+while True:
+    try:
+        number = int(input('Number: '))
+        break
+    except ValueError:
+        print('Enter a number!')
+print(abs(number))
 
 
 # Zadanie
@@ -122,14 +122,22 @@ def birth_year():
 # długo, aż ten nie wciśnie control+D – wówczas ma się pojawić informacja
 # o tym, ile liczb całkowitych użytkownik podał, jaka jest ich suma oraz
 # średnia.
-numbers = []
+count = 0
+sum_n = 0
 while True:
-    number = input('Enter number: ')
-    if number == 'e':
+    try:
+        number = int(input('Enter number: '))
+        sum_n += number
+        count += 1
+    except ValueError:
+        print('Only numbers')
+    except EOFError:
+        try:
+            print(sum_n, sum_n / count)
+            break
+        except ZeroDivisionError:
+            print('No numbers listed')
         break
-    numbers.append(int(number))
-print(sum(numbers), sum(numbers)/len(numbers))
-
 # Stwórz kalkulator BMI, a następnie wczuj się w złośliwego testera i
 # zabezpiecz przed wszelkimi błędami, które użytkownik może celowo
 # wprowadzić
