@@ -45,9 +45,10 @@ def triangle_area(a, h):
 def time(func):
     def wrapper(*args, **kwargs):
         start = datetime.now()
-        func(*args, **kwargs)
+        result = func(*args, **kwargs)
         stop = datetime.now()
         print(f'Time: {stop - start}')
+        return result
     return wrapper
 
 @time
@@ -57,7 +58,7 @@ def fib_iter(n):
         fib.append(fib[i-1]+fib[i-2])
     return fib[n]
 
-#fib_iter(100000)
+print(fib_iter(10000))
 
 # Zadanie
 # Zoptymalizuj rekurencyjną funkcję zwracającą n-ty wyraz ciągu
@@ -65,14 +66,14 @@ def fib_iter(n):
 
 def memoize(function):
     cache = {}
-    def decorated_function(*args):
+    def wrapper(*args):
         if args in cache:
             return cache[args]
         else:
             val = function(*args)
-            cache[args] = val
+            cache[args] = function(*args)
             return val
-    return decorated_function
+    return wrapper
 
 
 @memoize
@@ -83,9 +84,8 @@ def fib_rek(n):
         return 0
     return fib_rek(n-1) + fib_rek(n-2)
 
-# fib_rek(1000)
-
-#fib_rek(3)
+# print(fib_rek(4))
+# print(fib_rek(500))
 
 # Zadanie
 # Napisz dekorator, który spowoduje, że przy wywołaniu udekorowanej
@@ -184,5 +184,5 @@ def func1():
 def func2(a, b):
     return a + b
 
-print(func1())
-print(func2(2, 3))
+# print(func1())
+# print(func2(2, 3))

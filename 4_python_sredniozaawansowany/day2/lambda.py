@@ -114,9 +114,9 @@ dogs = [Dog('Fluffy', 12), Dog('Knickers', 3), Dog('Lessie', 10)]
 # Zadanie 4
 # Stwórz 3 różne funkcje, które przyjmują jako argument listę, a zwracają
 # iloczyn wszystkich jej dodatnich elementów.
+import math
 
-
-lst_pos = [-4, 3, 4, -2]
+lst_pos = [-4, 3, 4, -2, 10]
 
 def multiply_positive(lst):
     multi = 1
@@ -127,7 +127,7 @@ def multiply_positive(lst):
 
 # print(multiply_positive(lst_pos))
 # print(reduce(lambda x, y: x * y, list(filter(lambda x: x > 0, lst_pos))))
-# print(reduce(lambda x, y: x * y, [x for x in lst_pos if x > 0]))
+# print(math.prod([x for x in lst_pos if x > 0]))
 
 # Zadanie 5
 # Stwórz funkcję, która przyjmuje listę napisów i zwraca ją w postaci
@@ -135,3 +135,4 @@ def multiply_positive(lst):
 
 list_word = ['one', 'two','three', 'four', 'five', 'six', 'eleven']
 print(sorted(list_word, key=lambda x: len(x)))
+print(sorted(list_word, key=len))
