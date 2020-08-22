@@ -87,13 +87,13 @@ def is_divisible_4(number):
 text = "SZczecin, POlska, Japonia IT, WW"
 def replace_second_upper(text):
     pattern = r"\b([A-Z])([A-Z])(\w+)"
-    new_text = re.sub(pattern, lambda m: m.group(1) + m.group(2).lower() + m.group(3), text)
-    pattern = r"\b([A-Z])([A-Z])\b"
-    for i in re.finditer(pattern, new_text):
-        st, end = i.span()
-        print(f"Do yo want to repalace {new_text[st:end]}?")
+    new_text = re.sub(pattern, lambda m: m.group(0).capitalize(), text)  #lambda m: m.group(1) + m.group(2).lower() + m.group(3)
+    pattern = r"([A-Z][A-Z])"
+    for i in re.findall(pattern, new_text):
+        print(f"Do yo want to repalace {i}?")
         yes = input()
         if yes == 'y':
-            new_new_text = new_text[:st+1] + new_text[st+1].lower() + new_text[end:]
-    return new_new_text
-# print(replace_second_upper(text))
+            print(i.capitalize())
+            new_text = re.sub(i, i.capitalize(), new_text)
+    return new_text
+print(replace_second_upper(text))
